@@ -1,9 +1,24 @@
-#root {
+body {
+  margin: 0;
+}
+
+#root > div {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(25rem, 100%), 1fr));
   overflow-x: hidden;
 }
 
-[id] {
-  border-width: medium;
+[title] {
+  position: relative;
+  padding-block: 4rem;
+  padding-inline: 1rem;
+  border: 0.2rem solid black;
+}
+
+[title]::before {
+  content: attr(title);
+  position: absolute;
+  inset-block-start: 1rem;
+  font-weight: bolder;
+  font-size: 2rem;
 }

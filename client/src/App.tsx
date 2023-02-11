@@ -9,9 +9,9 @@ export function GetAll() {
   if (!users.isFetching && !users.data) return <>No data</>;
 
   return (
-    <pre id='all-users' title='Get all users'>
-      {JSON.stringify(users.data, null, 2)}
-    </pre>
+    <div title='Get all users'>
+      <pre>{JSON.stringify(users.data, null, 2)}</pre>
+    </div>
   );
 }
 
@@ -26,16 +26,10 @@ export function GetById() {
   const isEmpty = !user.isFetching && !user.data;
 
   return (
-    <div>
+    <div title='Get user by id'>
       <input type='number' min='1' max='10' value={userId || ""} onChange={(e) => setUserId(parseFloat(e.target.value))} />
       {isEmpty && <>No data</>}
-      {isLoading ? (
-        <>Loading...</>
-      ) : (
-        <pre id='user-by-id' title='Get user by id'>
-          {JSON.stringify(user.data, null, 2)}
-        </pre>
-      )}
+      {isLoading ? <>Loading...</> : <pre>{JSON.stringify(user.data, null, 2)}</pre>}
     </div>
   );
 }
@@ -48,7 +42,7 @@ export function CreateUser() {
   if (user.isLoading) return <>Creating...</>;
 
   return (
-    <div id='create' title='Create user'>
+    <div title='Create user'>
       <input value={name} onChange={(e) => setName(e.target.value)} />
       <button onClick={() => user.mutate({ name })}>Create</button>
       <pre>{JSON.stringify(user.data, null, 2)}</pre>
