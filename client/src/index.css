@@ -1,0 +1,9 @@
+#root {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(25rem, 100%), 1fr));
+  overflow-x: hidden;
+}
+
+[id] {
+  border-width: medium;
+}
