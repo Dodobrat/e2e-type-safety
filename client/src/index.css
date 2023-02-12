@@ -4,8 +4,7 @@ body {
 
 #root > div {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(25rem, 100%), 1fr));
-  overflow-x: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
 }
 
 [title] {

@@ -10,7 +10,11 @@ export function GetAll() {
 
   return (
     <div title='Get all Posts'>
-      <pre>{JSON.stringify(posts.data, null, 2)}</pre>
+      <ul>
+        {posts.data?.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -29,7 +33,7 @@ export function GetById() {
     <div title='Get Post by id'>
       <input type='number' min='1' max='10' value={postId || ""} onChange={(e) => setPostId(parseFloat(e.target.value))} />
       {isEmpty && <>No data</>}
-      {isLoading ? <>Loading...</> : <pre>{JSON.stringify(post.data, null, 2)}</pre>}
+      {isLoading ? <>Loading...</> : <p>{post.data?.title}</p>}
     </div>
   );
 }
@@ -45,7 +49,7 @@ export function Create() {
     <div title='Create Post'>
       <input value={title} onChange={(e) => setTitle(e.target.value)} />
       <button onClick={() => post.mutate({ title })}>Create</button>
-      <pre>{JSON.stringify(post.data, null, 2)}</pre>
+      <p>Created a new post with id: {post.data?.id}</p>
     </div>
   );
 }

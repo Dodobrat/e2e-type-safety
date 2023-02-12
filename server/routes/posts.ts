@@ -17,8 +17,7 @@ export const postsRoutes = trpc.router({
     return data;
   }),
   getPostById: trpc.procedure.input(z.object({ postId: z.number().min(1).max(100) })).query(async (req) => {
-    const pid = req.input.postId;
-    const res = await fetch(`${BASE_URL}/posts/${pid}`);
+    const res = await fetch(`${BASE_URL}/posts/${req.input.postId}`);
     const data: Awaited<Promise<Post>> = await res.json();
     return data;
   }),
