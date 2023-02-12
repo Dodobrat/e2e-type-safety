@@ -2,13 +2,13 @@ import express from "express";
 import cors from "cors";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 
-import { usersRoutes } from "./routes/users";
+import { postsRoutes } from "./routes/posts";
 import { trpc } from "./trpc";
 
 const app = express();
 app.use(cors({ origin: "http://localhost:3000" }));
 
-const appRouter = trpc.mergeRouters(usersRoutes);
+const appRouter = trpc.mergeRouters(postsRoutes);
 
 app.use(
   "/trpc",

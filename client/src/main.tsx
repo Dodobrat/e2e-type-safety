@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { httpBatchLink } from "@trpc/react-query";
 
 import { trpc } from "./trpc";
-import { CreateUser, GetAll, GetById } from "./App";
+import { Create, GetAll, GetById } from "./App";
 import "./index.css";
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } });
@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <div>
-          <CreateUser />
+          <Create />
           <GetById />
           <GetAll />
         </div>

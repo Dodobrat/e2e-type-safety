@@ -2,50 +2,50 @@ import { useState } from "react";
 import { trpc } from "./trpc";
 
 export function GetAll() {
-  const users = trpc.getUsers.useQuery();
+  const posts = trpc.getPosts.useQuery();
 
-  if (users.isInitialLoading) return <>Loading...</>;
-  if (users.isFetching) return <>Fetching...</>;
-  if (!users.isFetching && !users.data) return <>No data</>;
+  if (posts.isInitialLoading) return <>Loading...</>;
+  if (posts.isFetching) return <>Fetching...</>;
+  if (!posts.isFetching && !posts.data) return <>No data</>;
 
   return (
-    <div title='Get all users'>
-      <pre>{JSON.stringify(users.data, null, 2)}</pre>
+    <div title='Get all Posts'>
+      <pre>{JSON.stringify(posts.data, null, 2)}</pre>
     </div>
   );
 }
 
 export function GetById() {
-  const [userId, setUserId] = useState(1);
+  const [postId, setPostId] = useState(1);
 
-  const enableQuery = Boolean(userId) && userId > 0 && userId < 11;
+  const enableQuery = Boolean(postId) && postId > 0 && postId < 101;
 
-  const user = trpc.getUserById.useQuery({ userId }, { enabled: enableQuery });
+  const post = trpc.getPostById.useQuery({ postId }, { enabled: enableQuery });
 
-  const isLoading = user.isFetching || user.isInitialLoading;
-  const isEmpty = !user.isFetching && !user.data;
+  const isLoading = post.isFetching || post.isInitialLoading;
+  const isEmpty = !post.isFetching && !post.data;
 
   return (
-    <div title='Get user by id'>
-      <input type='number' min='1' max='10' value={userId || ""} onChange={(e) => setUserId(parseFloat(e.target.value))} />
+    <div title='Get Post by id'>
+      <input type='number' min='1' max='10' value={postId || ""} onChange={(e) => setPostId(parseFloat(e.target.value))} />
       {isEmpty && <>No data</>}
-      {isLoading ? <>Loading...</> : <pre>{JSON.stringify(user.data, null, 2)}</pre>}
+      {isLoading ? <>Loading...</> : <pre>{JSON.stringify(post.data, null, 2)}</pre>}
     </div>
   );
 }
 
-export function CreateUser() {
-  const user = trpc.createUser.useMutation();
+export function Create() {
+  const post = trpc.createPost.useMutation();
 
-  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
 
-  if (user.isLoading) return <>Creating...</>;
+  if (post.isLoading) return <>Creating...</>;
 
   return (
-    <div title='Create user'>
-      <input value={name} onChange={(e) => setName(e.target.value)} />
-      <button onClick={() => user.mutate({ name })}>Create</button>
-      <pre>{JSON.stringify(user.data, null, 2)}</pre>
+    <div title='Create Post'>
+      <input value={title} onChange={(e) => setTitle(e.target.value)} />
+      <button onClick={() => post.mutate({ title })}>Create</button>
+      <pre>{JSON.stringify(post.data, null, 2)}</pre>
     </div>
   );
 }
